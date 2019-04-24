@@ -1,0 +1,44 @@
+.ui.button
+    &.redish
+        background: $red
+    &.block
+        width: 80%;
+    &.rounded
+        border-radius: 25px
+    &.square
+        font-weight: bolder
+        display: inline-block;
+        position: relative;
+        padding: 1em 2.4em;
+        text-decoration: none;
+        background: $red;/*Button Color*/
+        color: #FFF;
+        border-bottom: solid 3px #C81340;/*daker than background*/
+        border-right: solid 3px #C81340;/*darker than background*/
+        &:hover
+            background: #F34773;
+        &:active
+            border: none
+            transform: translate(6px,6px)
+        &:before
+            content: " ";
+            position: absolute;
+            bottom: -5px;
+            left: -1px;
+            width: 0;
+            height: 0;
+            border-width: 0 6px 6px 0px;
+            border-style: solid;
+            border-color: transparent;
+            border-bottom-color: #FFF;
+        &:after
+            content: " ";
+            position: absolute;
+            top: -1px;
+            right: -5px;
+            width: 0;
+            height: 0;
+            border-width: 0px 6px 6px 0px;
+            border-style: solid;
+            border-color: #FFF;
+            border-bottom-color: transparent;

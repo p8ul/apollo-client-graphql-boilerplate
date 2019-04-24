@@ -1,0 +1,56 @@
+{
+  "name": "graphql-client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@types/toastr": "^2.1.37",
+    "apollo-cache-inmemory": "^1.5.1",
+    "apollo-client": "^2.5.1",
+    "apollo-link": "^1.2.11",
+    "apollo-link-context": "^1.0.17",
+    "apollo-link-error": "^1.1.10",
+    "apollo-link-http": "^1.5.14",
+    "apollo-link-state": "^0.4.2",
+    "graphql": "^14.2.1",
+    "graphql-tag": "^2.10.1",
+    "node-sass": "^4.11.0",
+    "react": "^16.8.6",
+    "react-apollo": "^2.5.4",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "2.1.8",
+    "semantic-ui-react": "^0.86.0",
+    "toastr": "^2.1.4",
+    "typescript": "3.4.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "@types/node": "^11.13.6",
+    "@types/query-string": "^6.3.0",
+    "@types/react": "^16.8.14",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-router-dom": "^4.3.2",
+    "@typescript-eslint/eslint-plugin": "^1.7.0",
+    "eslint-config-airbnb-typescript": "^3.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.0",
+    "prettier": "^1.17.0",
+    "tslint-react": "^4.0.0"
+  }
+}
