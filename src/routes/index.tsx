@@ -2,8 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from '../components/Post';
 import SignIn from '../components/SignIn';
+import SignUp from '../components/SignUp';
 import PrivateRoute from './Private';
 import Sidebar from '../components/Sidebar';
+import PostForm from '../components/Post/PostForm'
 
 const routes = [
     {
@@ -13,10 +15,21 @@ const routes = [
       protected: true
     },
     {
+        path: '/post',
+        name: 'Post Form',
+        component: PostForm,
+        protected: true
+      },
+    {
       path: '/signin',
       name: 'Sigin Page',
       component: SignIn,
     },
+    {
+        path: '/signup',
+        name: 'Sign Up page',
+        component: SignUp
+    }
 ]
 
 const RoutedApp = () => {

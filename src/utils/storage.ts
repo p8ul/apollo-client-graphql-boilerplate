@@ -52,7 +52,9 @@ export default class Store {
       this.setLocalStorage(item);
   
       if (callback) {
-        callback();
+        setTimeout(() => {
+          callback();
+        }, 3000);        
       }
     }
 

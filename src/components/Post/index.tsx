@@ -2,7 +2,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import { ApolloError } from 'apollo-client';
 import gql from 'graphql-tag';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Icon } from 'semantic-ui-react';
 import PostCard from './Card';
 import Loader from '../Common/Loader';
 type Props = {
@@ -18,6 +18,7 @@ const FETCH_POSTS = gql`
     posts {
       title
       body
+      file
       id
       createdAt
       user {
@@ -30,13 +31,14 @@ const FETCH_POSTS = gql`
 `;
 
 interface data {
-    posts: Array<{title: string, body: string, createdAt: string}>
+    posts: Array<{title: string, body: string, file: string, createdAt: string}>
 }
 
 interface post {
-    title: string;
-    body: string;
-    createdAt: string;
+    title: string,
+    body: string,
+    file: string,
+    createdAt: string,
 }
 
 interface results {
@@ -53,12 +55,12 @@ export default class Post extends React.Component<Props, State> {
         return (
             <Query query={FETCH_POSTS}>
                 {({loading, error, data}: results) => {
-                    if (loading) return <div className="ui center aligned"><Loader /></div>;
+                    if (loading) return <div className="ui center aligned loading"><Loader /></div>;
                     if (error) return <p>Error :(</p>;
                     
                     
                     return (
-                        <div className="main-content posts">
+                        <div className="main-content posts ">
                             <Grid  columns={3} stackable>                               
                                 <Grid.Row>
                                 {data.posts.map((post: post, index: number) => (
@@ -66,6 +68,15 @@ export default class Post extends React.Component<Props, State> {
                                         <PostCard {...post} />
                                     </Grid.Column>                               
                                 ))} 
+                                {data.posts.length < 1 && (
+                                    <div className="ui center aligned fs-23 mt-15">
+                                      No content found
+                                       &nbsp;<a className="ui underlined  grey rounded mt-15 fs-23" href="/post">
+                                      <Icon name='plus circle' /> Add post
+                                    </a>
+                                    </div>
+                                   
+                                )}
                                 </Grid.Row>
                             </Grid>
                         </div>                        

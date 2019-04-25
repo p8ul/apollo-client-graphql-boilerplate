@@ -15,7 +15,38 @@ body
 .ui.center.aligned
     width: 100%;
     text-align: center;
-    margin-top: 13%;
+
+.loading
+    margin-top: 15%
+    margin-left: 5%
+    @include screen-size-tablet-max
+        padding-left: 25%
+        margin-top: 25%
+
+.cursor.pointing
+    cursor: pointer
+    
+.mt-15
+    margin-top: 15% !important
+
+.fs-23
+    font-size: 23px !important
+
+.center
+    text-align: center
+
+.float.right
+    float: right
+.underlined
+    text-decoration: underline
+    font-family: $playfair-family !important
+    transition: all 0.05s ease;
+    &:hover
+        color: white !important
+a
+    cursor: pointer
+.grey
+    color: $light-grey !important
     
 @keyframes Gradient 
 	0% 

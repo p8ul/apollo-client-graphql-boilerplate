@@ -14,3 +14,56 @@
 
 .auth-form
     margin-top: 8% !important;
+#imageUpload
+    display: none
+
+.image-preview
+    cursor: pointer
+    display: flex
+    justify-content: center
+    label
+        position: relative
+        cursor: pointer
+    .imageUpload__edit
+        position: absolute
+        background: white
+        border-color: black !important;
+        border-width: 2px
+        border-radius: 50%
+        width: 25px
+        height: 25px
+        right: -6px;
+        top: -12px;
+        padding: 0;
+        font-size: 12px;
+        box-shadow: 0 0 16px $grey
+        overflow: hidden;
+        .pencil
+            margin-top: 4px;
+            margin-left: 5px;
+
+    #imagePreview
+        border-style: solid
+        border-color: $grey
+        border-width: 0px
+        border-radius: 5px
+        box-shadow: 0 0 16px $grey !important;
+        background-color: white !important
+        transition: all 0.05s ease;
+        &:focus
+            border-color: black !important;
+            box-shadow: 0 8px 6px -6px $grey !important
+
+.image-edit
+    color: black
+
+.ui.text.container.post-form 
+    max-width: 60% !important;
+
+textarea
+    box-shadow: 0 8px 6px -6px $grey !important;
+    background-color: white !important
+    transition: all 0.05s ease;
+    &:focus
+        border-color: black !important;
+        box-shadow: 0 8px 6px -6px $grey !important

@@ -4,7 +4,7 @@ import React from 'react';
 const Loader: React.FunctionComponent = () => (
 
 <svg version="1.1" id="L1">
-    <circle fill="none" stroke="#fff" stroke-width="6" stroke-miterlimit="15" stroke-dasharray="14.2472,14.2472" cx="50" cy="50" r="47" >
+    <circle fill="none" stroke="#fff" strokeWidth="6" strokeMiterlimit="15" strokeDasharray="14.2472,14.2472" cx="50" cy="50" r="47" >
       <animateTransform 
          attributeName="transform" 
          attributeType="XML" 
@@ -14,7 +14,7 @@ const Loader: React.FunctionComponent = () => (
          to="360 50 50" 
          repeatCount="indefinite" />
   </circle>
-  <circle fill="none" stroke="#fff" stroke-width="1" stroke-miterlimit="10" stroke-dasharray="10,10" cx="50" cy="50" r="39">
+  <circle fill="none" stroke="#fff" strokeWidth="1" strokeMiterlimit="10" strokeDasharray="10,10" cx="50" cy="50" r="39">
       <animateTransform 
          attributeName="transform" 
          attributeType="XML" 

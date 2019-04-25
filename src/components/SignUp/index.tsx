@@ -6,10 +6,10 @@ import Input from '../Common/Input';
 import Store from '../../utils/storage';
 import { TOKEN } from '../../constants/keys'
 
-const LOGIN = gql`
+const SIGN_UP = gql`
 
-  mutation Login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
+  mutation SignUp($name: String!, $email: String!, $password: String!) {
+    register(name: $name, email: $email, password: $password) {
       token
     }
   }
@@ -17,13 +17,14 @@ const LOGIN = gql`
 
 interface data  {
   variables: {
+    name: string,
     email: string,
     password: string,
   }
 }
 
 interface Idata {
-  data: {login: {token: string}}
+  data: {register: {token: string}}
 }
 
 interface Props {
@@ -33,8 +34,9 @@ interface Props {
 }
 const store = new Store(TOKEN);
 
-class SignIn extends React.Component<Props> {
+class SignUp extends React.Component<Props> {
   state = {
+    name: '',
     email: '', 
     password: '',
     loading: false,
@@ -46,20 +48,20 @@ class SignIn extends React.Component<Props> {
     this.setState({ [name]: value });
   };
 
-  onSubmit = async (event: React.FormEvent, signIn: (data:data)=> any) => {
+  onSubmit = async (event: React.FormEvent, signUp: (data:data)=> any) => {
     event.preventDefault();
     this.setState({loading: true});
-    const { email, password } = this.state;
+    const { name, email, password } = this.state;
     const { history: { push } } = this.props;    
     
     try {
       
       let data: Idata;
-      data = await signIn({ variables: { email, password } });
+      data = await signUp({ variables: { name, email, password } });
       
-      store.insert(data.data.login, () => push('/'))
+      store.insert(data.data.register, () => push('/'))
       
-      toastr.success('Logged in successfully', "Success")
+      toastr.success('Signed up successfully', "Success")
     } catch (error) {
       this.setState({ loading: false });
       toastr.error(error.graphQLErrors[0].message, "Error")
@@ -69,8 +71,18 @@ class SignIn extends React.Component<Props> {
   }
 
   render() {
-    const { email, password, loading } = this.state;
-    const loginInputs = [
+    const { name, email, password, loading } = this.state;
+    const inputs = [
+      {
+        name: 'name',
+        value: name,
+        id: 'name',
+        type: 'text',
+        placeholder: 'Username',
+        onChange: this.onChange,
+        required: 'required',
+        icon: 'user outline',
+      },
       {
         name: 'email',
         value: email,
@@ -93,24 +105,24 @@ class SignIn extends React.Component<Props> {
       },
     ];
     return (
-      <Mutation mutation={LOGIN} >
-        {(signIn: MutationFunc, data: any) => (
+      <Mutation mutation={SIGN_UP} >
+        {(signUP: MutationFunc, data: any) => (
           <div className="ui raised very padded center aligned text container segment container-main animated fadeIn auth-form bg-image_">
             <div className="bg-image__cover_"></div>
-            <h1 className="ui header animated fadeIn delay-1s">Sign In</h1>
+            <h1 className="ui header animated zoomIn delay-1s">Sign Up</h1>
             <br />
             <form
               className={loading ? " ui form loading": ""}
               onSubmit={e => {
                 e.preventDefault();
-                this.onSubmit(e, signIn)
+                this.onSubmit(e, signUP)
               }}
             >
              
-              {loginInputs.map(input => {
+              {inputs.map(input => {
                 return <Input key={input.name} {...input} />
               })}
-              <button className="ui button redish block rounded square animated zoomIn delay-2s" type="submit">Sign In</button>
+              <button className="ui button redish block rounded square animated zoomIn delay-2s" type="submit">Sign Up</button>
             </form>
           </div>
         )}
@@ -120,4 +132,4 @@ class SignIn extends React.Component<Props> {
   
 };
 
-export default SignIn;
+export default SignUp;
