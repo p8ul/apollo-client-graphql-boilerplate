@@ -1,0 +1,29 @@
+
+{
+  "extends": [
+    "airbnb",
+    "prettier"
+  ],
+  "parser": "typescript-eslint-parser",
+  "globals": {
+     "document": true,
+     "window": true,
+     "FormData": true,
+     "FileReader": true
+  },
+  "env": {
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "modules": true
+    }
+  },
+  "rules": {
+    "import/no-unresolved": 0,
+    "react/jsx-filename-extension": 0
+  }
+}

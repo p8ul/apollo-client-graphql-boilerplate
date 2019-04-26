@@ -24,7 +24,7 @@ const MainMenu = ({ sidebarOpen, toggleSidebar, goBack, pathname }: Imenu) => {
       <a href="/" className="logo item">
         APOLLO
       </a>
-      <div >
+      <div>
         <svg
           className={sidebarOpen ? 'bars active' : 'bars'}
           viewBox="0 0 100 100"

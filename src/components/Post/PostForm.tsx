@@ -112,39 +112,39 @@ export default class PostForm extends React.Component<Props> {
             },
         ]
         return (
-            <Mutation mutation={ADD_POST}>
-                {(addPost: MutationFunc, data: any ) => (
-                    <div className="ui raised very padded centr aligned text container segment container-main animated fadeIn post-form bg-image_">
-                    <div className="bg-image__cover_"></div>
-                    <h1 className="ui header">Add Post</h1>
-                    <br />
-                    <form
-                      className={loading ? " ui form loading center aligned": "ui form center aligned"}
-                      onSubmit={e => {
+          <Mutation mutation={ADD_POST}>
+            {(addPost: MutationFunc, data: any ) => (
+              <div className="ui raised very padded centr aligned text container segment container-main animated fadeIn post-form bg-image_">
+                <div className="bg-image__cover_" />
+                <h1 className="ui header">Add Post</h1>
+                <br />
+                <form
+                  className={loading ? " ui form loading center aligned": "ui form center aligned"}
+                  onSubmit={e => {
                         e.preventDefault();
                         this.onSubmit(e, addPost)
                       }}
-                    >
-                     <Grid columns={2} stackable>
-                         <Grid.Row>
-                             <Grid.Column>
-                                {postInputs.map(input => {
+                >
+                  <Grid columns={2} stackable>
+                    <Grid.Row>
+                      <Grid.Column>
+                        {postInputs.map(input => {
                                     return <Input key={input.name} {...input} />
                                 })}                                
-                                <textarea name="body" style={{ minHeight: 100 }} className="" placeholder="A cool post description..." value={body} onChange={this.onTextChange} />
+                        <textarea name="body" style={{ minHeight: 100 }} className="" placeholder="A cool post description..." value={body} onChange={this.onTextChange} />
   
-                             </Grid.Column>
-                             <Grid.Column>
-                                <ImageUpload onImageChange={this.onImageChange} />
-                             </Grid.Column>
-                         </Grid.Row>
-                     </Grid>
+                      </Grid.Column>
+                      <Grid.Column>
+                        <ImageUpload onImageChange={this.onImageChange} />
+                      </Grid.Column>
+                    </Grid.Row>
+                  </Grid>
                       
-                      <button className="ui center aligned button redish block rounded square animated zoomIn delayed-2s" type="submit">Submit</button>
-                    </form>
-                  </div>
+                  <button className="ui center aligned button redish block rounded square animated zoomIn delayed-2s" type="submit">Submit</button>
+                </form>
+              </div>
                 )}
-            </Mutation>
+          </Mutation>
         )
     }
 

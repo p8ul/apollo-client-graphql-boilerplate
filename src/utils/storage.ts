@@ -4,7 +4,9 @@ export default class Store {
      * @param {function()} [callback] Called when the Store is ready
      */
     private getLocalStorage: ()=> any;
+
     private setLocalStorage: (data: any)=> void;
+
     constructor(name: string) {
       /**
        * @type {Storage}
@@ -12,7 +14,6 @@ export default class Store {
       /**
        * @type {ItemList}
        */
-      let items = {};
       const { localStorage } = window;
       /**
        * Read the local Item from localStorage.
@@ -23,7 +24,6 @@ export default class Store {
         try {
           return JSON.parse(localStorage.getItem(name) || '{}');
         } catch (error) {
-          console.warn(error)
           return {};
         }
       };

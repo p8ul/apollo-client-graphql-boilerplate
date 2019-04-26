@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 import { Grid, Icon } from 'semantic-ui-react';
 import PostCard from './Card';
 import Loader from '../Common/Loader';
+
 type Props = {
 
 }
@@ -53,37 +54,39 @@ export default class Post extends React.Component<Props, State> {
 
     render() {
         return (
-            <Query query={FETCH_POSTS}>
-                {({loading, error, data}: results) => {
+          <Query query={FETCH_POSTS}>
+            {({loading, error, data }: results) => {
                     if (loading) return <div className="ui center aligned loading"><Loader /></div>;
-                    if (error) return <p>Error :(</p>;
-                    
+                    if (error) return <p>Error :(</p>;                    
                     
                     return (
-                        <div className="main-content posts ">
-                            <Grid  columns={3} stackable>                               
-                                <Grid.Row>
-                                {data.posts.map((post: post, index: number) => (
-                                    <Grid.Column key={post.title + index}>
-                                        <PostCard {...post} />
-                                    </Grid.Column>                               
+                      <div className="main-content posts ">
+                        <Grid columns={3} stackable>                               
+                          <Grid.Row>
+                            {data.posts.map((post: post, index: number) => (
+                              <Grid.Column key={post.title + index}>
+                                <PostCard {...post} />
+                              </Grid.Column>                               
                                 ))} 
-                                {data.posts.length < 1 && (
-                                    <div className="ui center aligned fs-23 mt-15">
+                            {data.posts.length < 1 && (
+                              <div className="ui center aligned fs-23 mt-15">
                                       No content found
-                                       &nbsp;<a className="ui underlined  grey rounded mt-15 fs-23" href="/post">
-                                      <Icon name='plus circle' /> Add post
-                                    </a>
-                                    </div>
+                                       &nbsp;
+                                <a className="ui underlined  grey rounded mt-15 fs-23" href="/post">
+                                  <Icon name='plus circle' />
+                                  {' '}
+Add post
+                                </a>
+                              </div>
                                    
                                 )}
-                                </Grid.Row>
-                            </Grid>
-                        </div>                        
+                          </Grid.Row>
+                        </Grid>
+                      </div>                        
                     )
                     
                 }}
-            </Query>
+          </Query>
         )
     }
 }

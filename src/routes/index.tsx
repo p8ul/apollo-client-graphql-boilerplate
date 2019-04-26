@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from '../components/Post';
 import SignIn from '../components/SignIn';
@@ -6,6 +6,7 @@ import SignUp from '../components/SignUp';
 import PrivateRoute from './Private';
 import Sidebar from '../components/Sidebar';
 import PostForm from '../components/Post/PostForm'
+import { any } from 'prop-types';
 
 const routes = [
     {

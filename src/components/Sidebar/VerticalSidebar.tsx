@@ -21,32 +21,32 @@ const VerticalSidebar = ({ visible }: Idata) => (
     width='thin'
   >
     <Menu.Item as='div'>
-      <a href='/' >
-      <Icon name='home' />
+      <a href='/'>
+        <Icon name='home' />
       Home
       </a>
-      </Menu.Item>
-      {!IsloggedIn && (
-        <React.Fragment>
-          <Menu.Item as='div'>
-              <a href='/signin' >
-              <Icon name='user' />
+    </Menu.Item>
+    {!IsloggedIn && (
+    <React.Fragment>
+      <Menu.Item as='div'>
+        <a href='/signin'>
+          <Icon name='user' />
               Sign in
-              </a>
-          </Menu.Item>
-          <Menu.Item as='div'>
-              <a href='/signup' >
-              <Icon name='user plus' />
+        </a>
+      </Menu.Item>
+      <Menu.Item as='div'>
+        <a href='/signup'>
+          <Icon name='user plus' />
               Sign Up
-              </a>
-          </Menu.Item>
-        </React.Fragment>
+        </a>
+      </Menu.Item>
+    </React.Fragment>
       ) 
       
       }
     
     <Menu.Item as='div'>
-      <a href='/post' >
+      <a href='/post'>
         <Icon name='newspaper outline' />
         Post
       </a>

@@ -40,7 +40,6 @@ class SignUp extends React.Component<Props> {
     email: '', 
     password: '',
     loading: false,
-    errors: {}
   }
 
   onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,7 +63,6 @@ class SignUp extends React.Component<Props> {
       toastr.success('Signed up successfully', "Success")
     } catch (error) {
       this.setState({ loading: false });
-      toastr.error(error.graphQLErrors[0].message, "Error")
     }
     
 
@@ -105,10 +103,10 @@ class SignUp extends React.Component<Props> {
       },
     ];
     return (
-      <Mutation mutation={SIGN_UP} >
-        {(signUP: MutationFunc, data: any) => (
+      <Mutation mutation={SIGN_UP}>
+        {(signUP: MutationFunc) => (
           <div className="ui raised very padded center aligned text container segment container-main animated fadeIn auth-form bg-image_">
-            <div className="bg-image__cover_"></div>
+            <div className="bg-image__cover_" />
             <h1 className="ui header animated zoomIn delay-1s">Sign Up</h1>
             <br />
             <form

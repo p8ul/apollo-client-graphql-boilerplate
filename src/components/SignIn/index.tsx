@@ -62,7 +62,6 @@ class SignIn extends React.Component<Props> {
       toastr.success('Logged in successfully', "Success")
     } catch (error) {
       this.setState({ loading: false });
-      toastr.error(error.graphQLErrors[0].message, "Error")
     }
     
 
@@ -93,10 +92,10 @@ class SignIn extends React.Component<Props> {
       },
     ];
     return (
-      <Mutation mutation={LOGIN} >
+      <Mutation mutation={LOGIN}>
         {(signIn: MutationFunc, data: any) => (
           <div className="ui raised very padded center aligned text container segment container-main animated fadeIn auth-form bg-image_">
-            <div className="bg-image__cover_"></div>
+            <div className="bg-image__cover_" />
             <h1 className="ui header animated fadeIn delay-1s">Sign In</h1>
             <br />
             <form

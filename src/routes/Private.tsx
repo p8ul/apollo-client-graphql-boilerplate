@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import PropTypes, { exact } from 'prop-types';
 import Store from '../utils/storage';
 import { TOKEN } from '../constants/keys'
 
@@ -18,9 +19,9 @@ export const PrivateRoute = (data: any) => {
                       component={prop.component}
                     />
          * */
-        <Route
-      {...rest}
-      render={props =>
+      <Route
+        {...rest}
+        render={props =>
         isLoggedIn ? (
           <Component {...props} />
         ) : (
@@ -32,8 +33,9 @@ export const PrivateRoute = (data: any) => {
           />
         )
       }
-    />
+      />
       );
 }
+
 
 export default PrivateRoute;
