@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 import gql from "graphql-tag";
-import toastr from 'toastr';
+import toastr from "toastr";
+// eslint-disable-next-line
 import { Mutation, MutationFunc } from "react-apollo";
-import Input from '../Common/Input';
-import Store from '../../utils/storage';
-import { TOKEN } from '../../constants/keys'
+import Input from "../Common/Input";
+import Store from "../../utils/storage";
+import { TOKEN } from "../../constants/keys";
 
 const SIGN_UP = gql`
-
   mutation SignUp($name: String!, $email: String!, $password: String!) {
     register(name: $name, email: $email, password: $password) {
       token
@@ -15,92 +15,92 @@ const SIGN_UP = gql`
   }
 `;
 
-interface data  {
+interface data {
   variables: {
-    name: string,
-    email: string,
-    password: string,
-  }
+    name: string;
+    email: string;
+    password: string;
+  };
 }
 
 interface Idata {
-  data: {register: {token: string}}
+  data: { register: { token: string } };
 }
 
 interface Props {
-    history: {
-      push: (name: string) => any
-    }
+  history: {
+    push: (name: string) => any;
+  };
 }
 const store = new Store(TOKEN);
 
 class SignUp extends React.Component<Props> {
   state = {
-    name: '',
-    email: '', 
-    password: '',
-    loading: false,
-  }
+    name: "",
+    email: "",
+    password: "",
+    loading: false
+  };
 
   onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
 
-  onSubmit = async (event: React.FormEvent, signUp: (data:data)=> any) => {
+  onSubmit = async (event: React.FormEvent, signUp: (data: data) => any) => {
     event.preventDefault();
-    this.setState({loading: true});
+    this.setState({ loading: true });
     const { name, email, password } = this.state;
-    const { history: { push } } = this.props;    
-    
+    const {
+      history: { push }
+    } = this.props;
+
     try {
-      
-      let data: Idata;
-      data = await signUp({ variables: { name, email, password } });
-      
-      store.insert(data.data.register, () => push('/'))
-      
-      toastr.success('Signed up successfully', "Success")
+      const data: Idata = await signUp({
+        variables: { name, email, password }
+      });
+
+      store.insert(data.data.register, () => push("/"));
+
+      toastr.success("Signed up successfully", "Success");
     } catch (error) {
       this.setState({ loading: false });
     }
-    
-
-  }
+  };
 
   render() {
     const { name, email, password, loading } = this.state;
     const inputs = [
       {
-        name: 'name',
+        name: "name",
         value: name,
-        id: 'name',
-        type: 'text',
-        placeholder: 'Username',
+        id: "name",
+        type: "text",
+        placeholder: "Username",
         onChange: this.onChange,
-        required: 'required',
-        icon: 'user outline',
+        required: "required",
+        icon: "user outline"
       },
       {
-        name: 'email',
+        name: "email",
         value: email,
-        id: 'email',
-        type: 'email',
-        placeholder: 'Email',
+        id: "email",
+        type: "email",
+        placeholder: "Email",
         onChange: this.onChange,
-        required: 'required',
-        icon: 'mail outline',
+        required: "required",
+        icon: "mail outline"
       },
       {
-        name: 'password',
+        name: "password",
         value: password,
-        id: 'password',
-        type: 'password',
-        placeholder: 'Password',
+        id: "password",
+        type: "password",
+        placeholder: "Password",
         onChange: this.onChange,
-        required: 'required',
-        icon: 'lock'
-      },
+        required: "required",
+        icon: "lock"
+      }
     ];
     return (
       <Mutation mutation={SIGN_UP}>
@@ -110,24 +110,27 @@ class SignUp extends React.Component<Props> {
             <h1 className="ui header animated zoomIn delay-1s">Sign Up</h1>
             <br />
             <form
-              className={loading ? " ui form loading": ""}
+              className={loading ? " ui form loading" : ""}
               onSubmit={e => {
                 e.preventDefault();
-                this.onSubmit(e, signUP)
+                this.onSubmit(e, signUP);
               }}
             >
-             
               {inputs.map(input => {
-                return <Input key={input.name} {...input} />
+                return <Input key={input.name} {...input} />;
               })}
-              <button className="ui button redish block rounded square animated zoomIn delay-2s" type="submit">Sign Up</button>
+              <button
+                className="ui button redish block rounded square animated zoomIn delay-2s"
+                type="submit"
+              >
+                Sign Up
+              </button>
             </form>
           </div>
         )}
       </Mutation>
     );
   }
-  
-};
+}
 
 export default SignUp;

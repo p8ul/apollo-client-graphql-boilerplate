@@ -3,8 +3,10 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import { WebSocketLink } from "apollo-link-ws";
-import { ApolloLink } from "apollo-link";
+import { ApolloLink, split } from "apollo-link";
 import { onError } from "apollo-link-error";
+import { getMainDefinition } from 'apollo-utilities';
+
 import toastr from 'toastr';
 import { token } from './auth';
 
@@ -33,15 +35,28 @@ const authLink = setContext((_, { headers }) => {
 
 const cache = new InMemoryCache();
 
+const link = split(
+  // split based on operation type
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    );
+  },
+  wsLink,
+  httpLink,
+);
 const client = new ApolloClient({
   cache,
-  link: ApolloLink.from([onError(({ graphQLErrors, networkError }) => {
+  link: ApolloLink.from([
+    onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors)
-      graphQLErrors.map(({ message, locations, path }) =>
+      graphQLErrors.map(({ message }) =>
         toastr.error(message)
       );
     if (networkError) console.log(`[Network error]: ${networkError}`);
-  }),httpLink, authLink, wsLink]),
+  }), authLink, link]),
 });
 
 cache.writeData({

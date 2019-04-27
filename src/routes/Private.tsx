@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import PropTypes, { exact } from 'prop-types';
 import Store from '../utils/storage';
 import { TOKEN } from '../constants/keys'
 

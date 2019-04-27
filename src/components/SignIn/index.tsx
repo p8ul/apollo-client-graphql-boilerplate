@@ -1,10 +1,13 @@
 import React from 'react';
 import gql from "graphql-tag";
 import toastr from 'toastr';
+// eslint-disable-next-line
 import { Mutation, MutationFunc } from "react-apollo";
 import Input from '../Common/Input';
 import Store from '../../utils/storage';
 import { TOKEN } from '../../constants/keys'
+// eslint-disable-next-line
+import { Props } from '../Post/interfaces';
 
 const LOGIN = gql`
 
@@ -26,11 +29,6 @@ interface Idata {
   data: {login: {token: string}}
 }
 
-interface Props {
-    history: {
-      push: (name: string) => any
-    }
-}
 const store = new Store(TOKEN);
 
 class SignIn extends React.Component<Props> {
@@ -38,7 +36,6 @@ class SignIn extends React.Component<Props> {
     email: '', 
     password: '',
     loading: false,
-    errors: {}
   }
 
   onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,8 +51,7 @@ class SignIn extends React.Component<Props> {
     
     try {
       
-      let data: Idata;
-      data = await signIn({ variables: { email, password } });
+      const data: Idata = await signIn({ variables: { email, password } });
       
       store.insert(data.data.login, () => push('/'))
       
@@ -63,7 +59,6 @@ class SignIn extends React.Component<Props> {
     } catch (error) {
       this.setState({ loading: false });
     }
-    
 
   }
 
@@ -93,7 +88,7 @@ class SignIn extends React.Component<Props> {
     ];
     return (
       <Mutation mutation={LOGIN}>
-        {(signIn: MutationFunc, data: any) => (
+        {(signIn: MutationFunc) => (
           <div className="ui raised very padded center aligned text container segment container-main animated fadeIn auth-form bg-image_">
             <div className="bg-image__cover_" />
             <h1 className="ui header animated fadeIn delay-1s">Sign In</h1>
